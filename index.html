@@ -39,7 +39,7 @@
             appId: "1:906931960122:web:02b6d090d163c2c135f803"
         };
 
-        const app = initializeApp(firebaseConfig);
+        const app = initializeApp(firebaseConfig, "PanelAdminVIP");
         const auth = getAuth(app);
         const db = getFirestore(app);
         const storage = getStorage(app);
