@@ -392,7 +392,12 @@
         
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 bg-white p-5 rounded-3xl shadow-sm border border-slate-100 gap-4">
             <div>
-                <h1 class="text-2xl font-display font-black text-slate-900 tracking-tight">Centro de <span class="text-primary">Mando</span></h1>
+                <h1 class="text-2xl font-display font-black text-slate-900 tracking-tight flex items-center gap-3">
+                    Centro de <span class="text-primary">Mando</span>
+                    <button onclick="window.cargarDatos()" class="p-2 bg-slate-50 text-slate-400 hover:text-primary hover:bg-emerald-50 rounded-lg transition-colors border border-slate-100" title="Refrescar Datos" id="btnRefreshDatos">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </button>
+                </h1>
                 <p class="text-xs text-slate-500 mt-1 font-medium">Administrador: <span id="adminEmail" class="font-bold text-slate-700"></span></p>
             </div>
             <button onclick="logout()" class="px-4 py-2 bg-rose-50 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-100 transition-colors border border-rose-100 shadow-sm flex items-center gap-2">
