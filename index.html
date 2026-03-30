@@ -105,7 +105,7 @@
             } catch (error) { alert("Error al rechazar: " + error.message); }
         };
 
-        window.limpiarReferido = async (email, socioActual) => {
+       window.limpiarReferido = async (email, socioActual) => {
             if(!confirm(`¿Seguro que querés desvincular al socio [ ${socioActual} ] del cliente ${email}?`)) return;
             try {
                 await updateDoc(doc(db, "usuarios_multimeta", email), { 
@@ -116,6 +116,20 @@
                 window.cargarDatos();
             } catch (error) { 
                 alert("Error al limpiar el código: " + error.message); 
+            }
+        };
+
+        window.liquidarPartner = async (emailPartner, nombrePartner) => {
+            if(!window.confirm(`¿Ya hiciste la transferencia de 20.000 Gs a ${nombrePartner}?`)) return;
+            try {
+                await updateDoc(doc(db, "usuarios_multimeta", emailPartner), { 
+                    partner_saldo: increment(-20000), 
+                    partner_historico: increment(20000) 
+                });
+                alert("¡Liquidación registrada con éxito!"); 
+                window.cargarDatos();
+            } catch(e) { 
+                alert("Error al liquidar: " + e.message); 
             }
         };
 
@@ -260,7 +274,7 @@
                         <summary class="cursor-pointer font-bold outline-none text-[10px] uppercase tracking-widest text-slate-400 hover:text-slate-600">Afiliados (${referidos.length})</summary>
                         ${referidosHtml}
                     </details>
-                    ${listoParaCobrar ? `<button onclick="liquidarPartner('${p.email}', '${perf.nombre}')" class="w-full mt-4 py-2 bg-emerald-600 text-white font-black text-[10px] uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-colors flex items-center justify-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Liquidar 20k</button>` : ''}
+                    ${listoParaCobrar ? `<button onclick="window.liquidarPartner('${p.email}', '${perf.nombre.replace(/'/g, "\\'")}')" class="w-full mt-4 py-2 bg-emerald-600 text-white font-black text-[10px] uppercase tracking-wider rounded-xl shadow-lg hover:bg-emerald-700 transition-colors flex items-center justify-center gap-1.5"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg> Liquidar 20k</button>` : ''}
                 </div>`;
             });
             html += '</div>';
